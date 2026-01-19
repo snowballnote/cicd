@@ -24,10 +24,12 @@ jobs:
       # 3-1) Spring Boot / Java 프로젝트 컴파일 & 패키징
       - name: Build project with Maven
         run: mvn -B clean package
+		working-directory: cicd
 		
       # 3-2) Jib으로 Docker 이미지 TAR 생성
       - name: Build image tar with Jib
         run: mvn -B jib:buildTar
+		working-directory: cicd
 		
       # 4) 생성된 myapp.tar 파일을 서버로 전송 (SCP)
       - name: Copy image tar to server
