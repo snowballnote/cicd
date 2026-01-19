@@ -52,7 +52,7 @@ jobs:
         host: ${{ secrets.SERVER_HOST }}
         username: ${{ secrets.SERVER_USER }}
         key: ${{ secrets.SERVER_SSH_KEY }}
-        script: |
+        script: | 
           # TAR 파일을 Docker 이미지로 로드 (이미지 생성)
           sudo docker load < /home/ubuntu/target/myapp.tar
 
