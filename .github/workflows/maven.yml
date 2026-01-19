@@ -44,8 +44,7 @@ jobs:
         source: "target/myapp.tar"
         target: "/home/ubuntu"
 
-		# 5) 서버에 SSH 접속해서 Docker 명령 실행 (스크립트 파일 없음)
-		# 환경변수는 github actions 설정
+		# 5) 서버에 SSH 접속해서 Docker 명령 실행 (스크립트 파일 없음), 환경변수는 github actions 설정
 		- name: Run container on server (no script)
 		  uses: appleboy/ssh-action@v1.0.3
 		  with:
