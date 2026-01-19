@@ -53,6 +53,19 @@
 					<to>
 						<image>myapp</image>
 					</to>
+					
+					<!-- 추가된 코드 : 이미지 설정 -->
+					<container>
+						<ports>
+							<port>8080</port>
+						</ports>
+						<creationTime>USE_CURRENT_TIMESTAMP</creationTime>
+					</container>
+					<!-- 이미지가 포함된 myapp.tar 압축파일 만듬 -->
+					<outputPaths>
+						<tar>target/myapp.tar</tar>
+					</outputPaths>
+					
 				</configuration>
 			</plugin>
 
