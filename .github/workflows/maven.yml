@@ -44,30 +44,30 @@ jobs:
         source: "target/myapp.tar"
         target: "/home/ubuntu"
 
-    # 5) 서버에 SSH 접속해서 Docker 명령 실행 (스크립트 파일 없음)
-	# 환경변수는 github actions 설정
-	- name: Run container on server (no script)
-      uses: appleboy/ssh-action@v1.0.3
-      with:
-        host: ${{ secrets.SERVER_HOST }}
-        username: ${{ secrets.SERVER_USER }}
-        key: ${{ secrets.SERVER_SSH_KEY }}
-        script: | 
-          # TAR 파일을 Docker 이미지로 로드 (이미지 생성)
-          sudo docker load < /home/ubuntu/target/myapp.tar
+		# 5) 서버에 SSH 접속해서 Docker 명령 실행 (스크립트 파일 없음)
+		# 환경변수는 github actions 설정
+		- name: Run container on server (no script)
+		  uses: appleboy/ssh-action@v1.0.3
+		  with:
+		    host: ${{ secrets.SERVER_HOST }}
+		    username: ${{ secrets.SERVER_USER }}
+		    key: ${{ secrets.SERVER_SSH_KEY }}
+		    script: |
+		      # TAR 파일을 Docker 이미지로 로드 (이미지 생성)
+		      sudo docker load < /home/ubuntu/target/myapp.tar
 
-          # 기존 컨테이너 중지 (없어도 에러 무시)
-          sudo docker stop myapp || true
+		      # 기존 컨테이너 중지 (없어도 에러 무시)
+		      sudo docker stop myapp || true
 
-          # 기존 컨테이너 삭제 (없어도 에러 무시)
-          sudo docker rm myapp || true
+		      # 기존 컨테이너 삭제 (없어도 에러 무시)
+		      sudo docker rm myapp || true
 
-          # 새 컨테이너 실행
-          sudo docker run -d \
-            --name myapp \
-            -p 8080:8080 \
-            --restart unless-stopped \
-            myapp
+		      # 새 컨테이너 실행
+		      sudo docker run -d \
+		        --name myapp \
+		        -p 8080:8080 \
+		        --restart unless-stopped \
+		        myapp
 
-          # 사용하지 않는 이전 이미지 정리
-          sudo docker image prune -f
+		      # 사용하지 않는 이전 이미지 정리
+		      sudo docker image prune -f
